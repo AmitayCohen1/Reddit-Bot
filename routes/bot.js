@@ -16,20 +16,20 @@ const redditPassword = process.env.REDDIT_PASSWORD
   });
 
   const subReddit = 'TestbotForLan'
-  
+
 router.post('/newproperty', async (req,res) => { 
-    try {
-        const { propertyName } = req.body  
-        const { stockPrice } = req.body  
-        const post = await reddit.getSubreddit(subReddit).submitSelfpost({
-            title: `New property! "${propertyName}" is now live.`,
-            text: `Shares of ${propertyName} are now available for ${stockPrice}`,
-        });
-        
-        res.status(200).json({'Success': post});
-    } catch(err) { 
-        res.status(400).send(err.message);
-    }
+        try {
+            const { propertyName } = req.body  
+            const { stockPrice } = req.body  
+
+            const post = await reddit.getSubreddit(subReddit).submitSelfpost({
+                title: `New property! "${propertyName}" is now live.`,
+                text: `Shares of ${propertyName} are now available for ${stockPrice}`,
+            });
+            res.status(200).json({'Success': post});
+        } catch(err) { 
+            res.status(400).json({'Failed': err.message} );
+        }
     })
 
 module.exports = router;
