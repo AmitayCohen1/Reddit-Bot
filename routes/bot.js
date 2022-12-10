@@ -15,12 +15,13 @@ const redditPassword = process.env.REDDIT_PASSWORD
     password: redditPassword,
   });
 
-
+  const subReddit = 'TestbotForLan'
+  
 router.post('/newproperty', async (req,res) => { 
     try {
         const { propertyName } = req.body  
         const { stockPrice } = req.body  
-        const post = await reddit.getSubreddit("TestbotForLan").submitSelfpost({
+        const post = await reddit.getSubreddit(subReddit).submitSelfpost({
             title: `New property! "${propertyName}" is now live.`,
             text: `Shares of ${propertyName} are now available for ${stockPrice}`,
         });

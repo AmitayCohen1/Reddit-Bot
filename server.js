@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const botRoutes = require('./routes/bot')
 require('dotenv').config()
-const Snoowrap = require("snoowrap");
 
 app.use(express.json())
 app.use('/api/botRoutes', botRoutes)
